@@ -16,5 +16,9 @@ For you can understand this project, you must know the some python subjects;
   
   We said, we have got 2 data. First Data and Second Data. First data file is train.txt and we use this file for train the decision tree. You can see in the file, the file has got 150 rows and 3 columns. 1. column is apple's x coordinate. 2. column is apple's y coordinate. 3. column is apple's color. So, we have got 150 apple and every apple has got 3 criterion. If you look at the train.txt file , you can see integers ( 1 - 2 - 3 ) for 3. column. If 3. column's data == 1 --> This apple color is "YELLOW". Elif 3. column's data == 2 --> This apple color is "RED" Elif 3. column's data == 3 --> This apple color is "Green".
   
-  For apples has got, only 1 color (Yellow - Red - Green), only 1 x coordinate, only  1 y coordinate. If you look at the test.txt file (We use this file for test decision tree), you can see "0" for 3. column. That's mean we don't know apple color's. This is the purpose. Guess. When test.txt is exported to the decision tree, decision tree'll say the apple's color for we. This is the logic of the decision tree.
+  For apples has got, only 1 color (Yellow - Red - Green), only 1 x coordinate, only  1 y coordinate. If you look at the test.txt file (We use this file for test decision tree), you can see "0" for 3. column. That's mean we don't know apple color's. This is the purpose. Guess. When test.txt is exported to the decision tree, decision tree'll say the apple's color for we. This is the logic of the decision tree. Guess a property of new data using old data.
+  
+  So, how we will code ? 
+  
+  
  
