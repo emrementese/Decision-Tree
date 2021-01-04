@@ -3,7 +3,7 @@ Basic Decision Tree with python
 
 Hi everyone !
   
-  My name is Emre MENTEŞE. I'm student in Istanbul Medeniyet University for Electric - Electronic Engineering. I want share my computer programing project.
+  My name is Emre MENTEŞE. I'm student in Istanbul Medeniyet University for Electric - Electronic Engineering. I want sharing my computer programing project.
 This project was given by Dr. Caner Sahin. The project about basic decision tree. Firstly we will train the decision tree with first data. After we'll test the
 decision tree with second data. The data has 3 criterion. We know 2 criterion and we'll guess to last criterion. 
 
