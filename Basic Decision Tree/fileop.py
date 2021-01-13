@@ -8,9 +8,16 @@ All file operation functions for basic decision tree and Apple Class for data.
 
 '''
 
+from abc import ABC,abstractmethod
+
 #Apple Class for data
-class Apple():
+class AppleForm(ABC):
 
-    pass
-
+    def __init__(self):
+        pass
+    
+    @abstractmethod
+    def information(self):
+        pass
+    
 
