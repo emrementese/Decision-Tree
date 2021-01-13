@@ -68,6 +68,23 @@ def filextraction():
             try:
                 os.system("clear")
             except:
-                print("Please design the line-69. for windows. --> os.system('...') ")
+                print("Please design the line-69. For windows. --> os.system('...') ")
             finally:
                 continue
+
+    def filedelete():
+        while True:
+            try:
+                filelocation = input("Enter the file locaiton")
+                with open(filelocation,"w","utf-8") as file:
+                    pass
+            except:
+                print("Locaition not found.")
+                time.sleep(3)
+                try:
+                    os.system("clear")
+                except:
+                    print("Please design the line-85. For windows. --> os.system('...') ")
+                finally:
+                    continue
+                
