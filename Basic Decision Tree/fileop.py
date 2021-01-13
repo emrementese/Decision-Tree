@@ -8,6 +8,8 @@ All file operation functions for basic decision tree and Apple Class for data.
 
 '''
 
+import time
+import os
 
 #Apple Class for data
 class oneapple():
@@ -35,30 +37,33 @@ class oneapple():
 #Data extraction function for train&test files.
 def filextraction():
     Apples = [] 
-    location = input("Enter the train & test file location: ")
-    try:
-        with open(location,"r",encoding="utf-8") as file:
-            lastdata = []
-            data = file.readlines()
-            for n in data:
-                data2 = n.replace("\n"," ")
-                data2 = data2.replace("\t"," ")
-                data2 = data2.split(" ")
-                for i in data2:
+    while True:
+        location = input("Enter the train & test file location: ")
+        try:
+            with open(location,"r",encoding="utf-8") as file:
+                lastdata = []
+                data = file.readlines()
+                for n in data:
+                    data2 = n.replace("\n"," ")
+                    data2 = data2.replace("\t"," ")
+                    data2 = data2.split(" ")
+                    for i in data2:
+                        try:
+                            lastdata.append(float(i))
+                        except:
+                            continue
                     try:
-                        lastdata.append(float(i))
+                        __apple = oneapple(lastdata[0],lastdata[1],lastdata[2])
+                        Apples.append(__apple)
                     except:
-                        continue
-                try:
-                    __apple = oneapple(lastdata[0],lastdata[1],lastdata[2])
-                    Apples.append(__apple)
-                except:
-                    print("File extraction error.")
-                    quit()
-                    
-                data2.clear()
-                lastdata.clear()
-            return Apples
-    except:
-        print("Error for file location.")
-
+                        print("File extraction error.")
+                        quit()
+                        
+                    data2.clear()
+                    lastdata.clear()
+                return Apples
+        except:
+            print("Error for file location. Wait 3 seconds.")
+            time.sleep(3)
+            os.system("clear")
+            continue
