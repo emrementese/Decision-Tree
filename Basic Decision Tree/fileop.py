@@ -10,12 +10,12 @@ All file operation functions for basic decision tree and Apple Class for data.
 
 
 #Apple Class for data
-class apple():
+class oneapple():
     classtype = "Apple"
     def __init__(self,xcordi,ycordi,color):
         #cordi: coordinate
         #control the train inputs
-        if (isinstance(xcordi, float) or isinstance(xcordi, int)) and (isinstance(ycordi, float) or isinstance(ycordi, int)):
+        if (isinstance(xcordi, float) and isinstance(ycordi, float)):
             self.xcordi = xcordi
             self.ycordi = ycordi
         else:
@@ -35,8 +35,29 @@ class apple():
 def filextraction():
     Apples = [] 
     location = input("Enter the train&test file location: ")
-    with open(location,"r",encoding="UTF-8"):
-        pass
+    try:
+        with open(location,"r",encoding="utf-8") as file:
+            lastdata = []
+            data = file.readlines()
+            for n in data:
+                data2 = n.replace("\n"," ")
+                data2 = data2.replace("\t"," ")
+                data2 = data2.split(" ")
+                for i in data2:
+                    try:
+                        lastdata.append(float(i))
+                    except:
+                        continue
+                try:
+                    __apple = oneapple(lastdata[0],lastdata[1],lastdata[2])
+                    Apples.append(__apple)
+                except:
+                    print("File extraction error.")
+                    quit()
 
-    return Apples
+                data2.clear()
+                lastdata.clear()
+            return Apples
+    except:
+        print("Error for file location.")
 
