@@ -8,16 +8,25 @@ All file operation functions for basic decision tree and Apple Class for data.
 
 '''
 
-from abc import ABC,abstractmethod
-
 #Apple Class for data
-class AppleForm(ABC):
+class apple():
+    classtype = "Apple"
+    def __init__(self,xcordi,ycordi,color):
+        #cordi: coordinate
+        if (isinstance(xcordi, float) or isinstance(xcordi, int)) and (isinstance(ycordi, float) or isinstance(ycordi, int)):
+            self.xcordi = xcordi
+            self.ycordi = ycordi
+        else:
+            raise Exception("Type error for apple's coordinates.")
+        
+        if ((color != 1) or (color != 2) or (color != 3)):
+            raise Exception("Number error for apple's color.")
+        else:
+            self.color = color
+    
+    #information function
+    def inf_apple(self):
+        pass
 
-    def __init__(self):
-        pass
-    
-    @abstractmethod
-    def information(self):
-        pass
-    
+
 
