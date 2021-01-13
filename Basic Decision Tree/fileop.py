@@ -8,11 +8,13 @@ All file operation functions for basic decision tree and Apple Class for data.
 
 '''
 
+
 #Apple Class for data
 class apple():
     classtype = "Apple"
     def __init__(self,xcordi,ycordi,color):
         #cordi: coordinate
+        #control the train inputs
         if (isinstance(xcordi, float) or isinstance(xcordi, int)) and (isinstance(ycordi, float) or isinstance(ycordi, int)):
             self.xcordi = xcordi
             self.ycordi = ycordi
@@ -29,4 +31,10 @@ class apple():
         pass
 
 
+#Data extraction function for train&test files.
+def filextraction():
+    location = input("Enter the train&test file location: ")
+    
+
+    return Apples
 
