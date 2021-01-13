@@ -9,14 +9,8 @@
 import fileop
 from threading import Thread
 
-
+print("--- Welcome Basic Decision Tree ---")
 traindata = fileop.filextraction()
 
-
-
-#all data color print
-for n in traindata:
-    print(n.color)
-
 #data count - train: 150 test: 22801
-print(len(traindata))
+print(f"Finded data count: {len(traindata)}")
