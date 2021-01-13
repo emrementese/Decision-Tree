@@ -12,6 +12,7 @@ All file operation functions for basic decision tree and Apple Class for data.
 #Apple Class for data
 class oneapple():
     classtype = "Apple"
+    
     def __init__(self,xcordi,ycordi,color):
         #cordi: coordinate
         #control the train inputs
@@ -21,20 +22,20 @@ class oneapple():
         else:
             raise Exception("Type error for apple's coordinates.")
         
-        if ((color != 1) or (color != 2) or (color != 3)):
+        if ((color != 1) and (color != 2) and (color != 3) and (color != 0)):
             raise Exception("Number error for apple's color.")
         else:
             self.color = color
-    
+
     #information function
     def inf_apple(self):
-        pass
+        print(f"This apple's:  X = {self.xcordi} | Y = {self.ycordi} | Color = {self.color}")
 
 
 #Data extraction function for train&test files.
 def filextraction():
     Apples = [] 
-    location = input("Enter the train&test file location: ")
+    location = input("Enter the train & test file location: ")
     try:
         with open(location,"r",encoding="utf-8") as file:
             lastdata = []
@@ -54,7 +55,7 @@ def filextraction():
                 except:
                     print("File extraction error.")
                     quit()
-
+                    
                 data2.clear()
                 lastdata.clear()
             return Apples
