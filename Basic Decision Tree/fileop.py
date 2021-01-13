@@ -65,5 +65,9 @@ def filextraction():
         except:
             print("Error for file location. Wait 3 seconds.")
             time.sleep(3)
-            os.system("clear")
-            continue
+            try:
+                os.system("clear")
+            except:
+                print("Please design the line-69. for windows. --> os.system('...') ")
+            finally:
+                continue
