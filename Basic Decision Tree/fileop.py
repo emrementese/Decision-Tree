@@ -33,8 +33,10 @@ class apple():
 
 #Data extraction function for train&test files.
 def filextraction():
+    Apples = [] 
     location = input("Enter the train&test file location: ")
-    
+    with open(location,"r",encoding="UTF-8"):
+        pass
 
     return Apples
 
