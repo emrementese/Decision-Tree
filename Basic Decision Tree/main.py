@@ -11,12 +11,17 @@
 import time
 import os
 import fileop
+import iteration
 from threading import Thread
 
 print("\n--- Welcome Basic Decision Tree ---")
 traindata = fileop.filextraction()
 #data count - train: 150 test: 22801
 print(f"Train data count finded: {len(traindata)} | Train is starting...")
+
+
+#control the entropi function
+#print(iteration.entropi(34,23,56))
 
 #Branching - traindata is root data.
 
