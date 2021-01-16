@@ -60,8 +60,31 @@ def entropi(ydata,rdata,gdata):
     return entropi_result
 
 
+#information gain function
+def infogain(*data):
+    # data have 6 element. data[0],data[1],data[2],data[3],data[4],data[5]
+    allyellow = data[0] + data[3]
+    allred = data[1] + data[4]
+    allgreen = data[2] + data[5]
 
+    #top node data count
+    topnode = allyellow + allred + allgreen
+    #left branching data
+    left_data = data[0] + data[1] + data[2]
+    #right branching data
+    right_data = data[3] + data[4] + data[5]
 
-
-
-
+    #top entropi H(s)
+    top_hs = entropi(allyellow,allred,allgreen)
+    #left entropi H(s)L
+    left_hs = entropi(data[0],data[1],data[2])
+    #right entropi
+    right_hs = entropi(data[3],data[4],data[5])
+    
+    # I : information gain
+    I = top_hs - ( ((left_data / topnode) * left_hs) + ((right_data / topnode) * right_hs) )
+    
+    #infogain function's result
+    result = [I,data]
+    return result
+    
