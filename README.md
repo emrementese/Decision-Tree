@@ -7,6 +7,6 @@ Hi everyone !
   
 For you can understand this project, you must know the some python subjects; Basic python information, File operation for python, Object oriented programming for python, Multithreading programming for python and some python modules.
 
-Thanks for read.
+Thanks for read !
 
 
