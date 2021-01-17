@@ -19,7 +19,10 @@ print("\n--- Welcome Basic Decision Tree ---")
 traindata = fileop.filextraction()
 #data count - train: 150 test: 22801
 print(f"Train data count finded: {len(traindata)} | Train is starting...")
+starttime = time.time()
 
+#control the rootiteration function
+#iteration.rootiteration(traindata)
 
 #control the entropi function
 #print(iteration.entropi(34,23,56))
@@ -29,3 +32,5 @@ print(f"Train data count finded: {len(traindata)} | Train is starting...")
 
 #Branching - traindata is root data.
 
+finistime = time.time()
+print(f"Training lasted {finistime - starttime} seconds.")
