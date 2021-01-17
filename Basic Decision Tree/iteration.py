@@ -12,6 +12,10 @@ All Iteration functions and class's for basic decision tree.
 import math
 import random
 
+#Termination criteria
+# (mindata,maks depth,iteration count)
+Tc = (10,4,15)
+
 
 class node():
     classtype = "Node"
@@ -49,6 +53,69 @@ class node():
         return result
 
 
+def rootiteration(Apples):
+    Lapple = []
+    Rapple = []
+    i = 0
+    #root iteration
+    while i < Tc[2]:
+        #the root node
+        ques = coorinfo()
+        for n in Apples:
+            if ques[0] == 1:
+                if n.xcordi >= ques[1]:
+                    Lapple.append(n)
+                elif n.xcordi < ques[1]:
+                    Rapple.append(n)
+                else:
+                    raise Exception("Branching error for rootiteration.")
+            elif ques[0] == 0:
+                if n.ycordi >= ques[1]:
+                    Lapple.append(n)
+                elif n.ycordi < ques[1]:
+                    Rapple.append(n)
+                else:
+                    raise Exception("Branching error for rootiteration.")
+            else:
+                raise Exception("Coorinfo function error !")
+        #yellow apple left = yal
+        yal = 0
+        ral = 0
+        gal = 0
+        #red apple right = rar
+        yar = 0
+        rar = 0
+        gar = 0
+        for La in Lapple:
+            if La.color == 1:
+                yal += 1
+            elif La.color == 2:
+                ral += 1
+            elif La.color == 3:
+                gal += 1
+            else:
+                raise Exception("Apple's color error for rootiteration.")
+        for Ra in Rapple:
+            if Ra.color == 1:
+                yar += 1
+            elif Ra.color == 2:
+                rar += 1
+            elif Ra.color == 3:
+                gar += 1
+            else:
+                raise Exception("Apple's color error for rootiteration.") 
+        A = infogain(yal,ral,gal,yar,rar,gar)
+        print(A)
+        Rapple.clear()
+        Lapple.clear()
+        i += 1
+        
+
+
+def mainiteration():
+    pass
+    
+
 # coordinate information funciton for iteration question
 def coorinfo():
     # question about - x (1) or y (0)
@@ -62,8 +129,7 @@ def coorinfo():
         # y coordinate question
         coordinate = random.uniform(-1,1)
     else:
-        print("Error for iteration function")
-        quit()
+        raise Exception("Error for coorinfo function")
 
     # coordinate information for iteration question
     corin = [coordinate_xy,coordinate]
