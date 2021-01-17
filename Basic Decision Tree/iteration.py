@@ -4,13 +4,49 @@
 -> Created by Emre MENTEŞE on 04.01.2021
 -> Copyright © 2021 Emre MENTEŞE. All rights reserved.
 
-All Iteration functions for basic decision tree.
+All Iteration functions and class's for basic decision tree.
 
 '''
 
 
 import math
 import random
+
+
+class node():
+    classtype = "Node"
+
+    def __init__(self,nodetype,ly_data,lr_data,lg_data,ry_data,rr_data,rg_data,iteraques):
+        #type the node
+        self.nodetype = nodetype
+        #Left apple's and it's colors
+        self.ly_data = ly_data
+        self.lr_data = lr_data
+        self.lg_data = lg_data
+        #Right apple's and it's colors
+        self.ry_data = ry_data
+        self.rr_data = rr_data
+        self.rg_data = rg_data
+        #iteration question for this node
+        self.iteraques = iteraques
+
+    def allleft(self):
+        #all left data
+        result = []
+        result.extend(self.ly_data,self.lr_data,self.lg_data)
+        return result
+
+    def allright(self):
+        #all right data
+        result = []
+        result.extend(self.ry_data,self.rr_data,self.rg_data)
+        return result
+
+    def alltop(self):
+        # all top data
+        result = []
+        result.extend(self.ly_data,self.lr_data,self.lg_data,self.ry_data,self.rr_data,self.rg_data)
+        return result
 
 
 # coordinate information funciton for iteration question
@@ -87,4 +123,3 @@ def infogain(*data):
     #infogain function's result
     result = [I,data]
     return result
-    
