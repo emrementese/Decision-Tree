@@ -12,9 +12,43 @@ All Iteration functions and class's for basic decision tree.
 import math
 import random
 
+
 #Termination criteria
 # (mindata,maks depth,iteration count)
 Tc = (10,4,15)
+
+
+class allinfogainresult():
+    classtype = "Control"
+
+    def __init__(self):
+        #iteration result for node.
+        self.allresult = []
+        #saved iteration results
+        self.result = []
+
+    def cleanresult(self):
+        self.result.clear()
+        return True
+    
+    def cleanallresult(self):
+        self.allresult.clear()
+        return True
+
+class infogainresult():
+
+    def __init__(self,infogain,ly_datas,lr_datas,lg_datas,ry_datas,rr_datas,rg_datas,ques0,ques1):
+        
+        # only one iteration results 
+        self.infogain = infogain
+        self.ly_datas = ly_datas
+        self.lr_datas = lr_datas
+        self.lg_datas = lg_datas
+        self.ry_datas = ry_datas
+        self.rr_datas = rr_datas
+        self.rg_datas = rg_datas
+        self.ques0 = ques0
+        self.ques1 = ques1
 
 
 class node():
@@ -53,6 +87,9 @@ class node():
         return result
 
 
+infogainr = allinfogainresult()
+
+
 def rootiteration(Apples):
     Lapple = []
     Rapple = []
@@ -64,15 +101,19 @@ def rootiteration(Apples):
         for n in Apples:
             if ques[0] == 1:
                 if n.xcordi >= ques[1]:
+                    #branching a left.
                     Lapple.append(n)
                 elif n.xcordi < ques[1]:
+                    #branching a right
                     Rapple.append(n)
                 else:
                     raise Exception("Branching error for rootiteration.")
             elif ques[0] == 0:
                 if n.ycordi >= ques[1]:
+                    #branching a left.
                     Lapple.append(n)
                 elif n.ycordi < ques[1]:
+                    #branching a right
                     Rapple.append(n)
                 else:
                     raise Exception("Branching error for rootiteration.")
@@ -104,17 +145,22 @@ def rootiteration(Apples):
                 gar += 1
             else:
                 raise Exception("Apple's color error for rootiteration.") 
-        A = infogain(yal,ral,gal,yar,rar,gar)
-        print(A)
+        #so we have a left apple's , right apple's and top apple's. We will compute the entropy of this branch
+        #iteration result
+        iteration_result = infogain(yal,ral,gal,yar,rar,gar)
+        # crate'a infogain result class
+        myclass = infogainresult(iteration_result[0],iteration_result[1][0],iteration_result[1][1],iteration_result[1][2],iteration_result[1][3],iteration_result[1][4],iteration_result[1][5],ques[0],ques[1])
+        # I save the result for iteration. Because we will select the max information gain.
+        infogainr.result.append(myclass)
         Rapple.clear()
         Lapple.clear()
+        iteration_result.clear()
         i += 1
-        
 
+    #so select the max information gain and save  data-question-infogain,right/left apples for this node.
+    for allresult in infogainr.result:
+        pass
 
-def mainiteration():
-    pass
-    
 
 # coordinate information funciton for iteration question
 def coorinfo():
