@@ -37,10 +37,10 @@ class allinfogainresult():
 
 class infogainresult():
 
-    def __init__(self,infogain,ly_datas,lr_datas,lg_datas,ry_datas,rr_datas,rg_datas,ques0,ques1):
+    def __init__(self,infogains,ly_datas,lr_datas,lg_datas,ry_datas,rr_datas,rg_datas,ques0,ques1):
         
         # only one iteration results 
-        self.infogain = infogain
+        self.infogains = infogains
         self.ly_datas = ly_datas
         self.lr_datas = lr_datas
         self.lg_datas = lg_datas
@@ -54,9 +54,11 @@ class infogainresult():
 class node():
     classtype = "Node"
 
-    def __init__(self,nodetype,ly_data,lr_data,lg_data,ry_data,rr_data,rg_data,iteraques):
+    def __init__(self,nodetype,infogain,ly_data,lr_data,lg_data,ry_data,rr_data,rg_data,iteraques):
         #type the node
         self.nodetype = nodetype
+        #informaiton gain result
+        self.infogain = infogain
         #Left apple's and it's colors
         self.ly_data = ly_data
         self.lr_data = lr_data
@@ -158,8 +160,20 @@ def rootiteration(Apples):
         i += 1
 
     #so select the max information gain and save  data-question-infogain,right/left apples for this node.
+    mylist = []
     for allresult in infogainr.result:
-        pass
+        mylist.append(allresult.infogains)
+    #max info gain
+    selected_infogain = max(mylist)
+    for allresult2 in infogainr.result:
+        if allresult2.infogains == selected_infogain:
+            #create a node
+            rootnode = node("root",allresult2.infogains,allresult2.ly_datas,allresult2.lr_datas,allresult2.lg_datas,allresult2.ry_datas,allresult2.rr_datas,allresult2.rg_datas,ques)
+            infogainr.allresult.append(rootnode)
+            infogainr.cleanresult()
+            return True
+        else:
+            continue
 
 
 # coordinate information funciton for iteration question
