@@ -11,6 +11,7 @@ All Iteration functions and class's for basic decision tree.
 
 import math
 import random
+from threading import Thread
 
 
 #Termination criteria
@@ -35,9 +36,10 @@ class allinfogainresult():
         self.allresult.clear()
         return True
 
+
 class infogainresult():
 
-    def __init__(self,infogains,ly_datas,lr_datas,lg_datas,ry_datas,rr_datas,rg_datas,ques0,ques1):
+    def __init__(self,infogains,ly_datas,lr_datas,lg_datas,ry_datas,rr_datas,rg_datas,queslist):
         
         # only one iteration results 
         self.infogains = infogains
@@ -47,80 +49,89 @@ class infogainresult():
         self.ry_datas = ry_datas
         self.rr_datas = rr_datas
         self.rg_datas = rg_datas
-        self.ques0 = ques0
-        self.ques1 = ques1
+        self.queslist = queslist
 
 
 class node():
     classtype = "Node"
 
-    def __init__(self,nodetype,infogain,ly_data,lr_data,lg_data,ry_data,rr_data,rg_data,iteraques):
+    def __init__(self,nodetype,infogain,leftdata,rightdata,iteraques):
         #type the node
         self.nodetype = nodetype
         #informaiton gain result
         self.infogain = infogain
-        #Left apple's and it's colors
-        self.ly_data = ly_data
-        self.lr_data = lr_data
-        self.lg_data = lg_data
-        #Right apple's and it's colors
-        self.ry_data = ry_data
-        self.rr_data = rr_data
-        self.rg_data = rg_data
+        # branched data for left
+        self.leftdata = leftdata
+        # branched data for right
+        self.rightdata = rightdata 
         #iteration question for this node
         self.iteraques = iteraques
 
-    def allleft(self):
-        #all left data
-        result = []
-        result.extend(self.ly_data,self.lr_data,self.lg_data)
-        return result
+    # def allleft(self):
+    #     #all left data
+    #     result = []
+    #     result.extend(self.ly_data)
+    #     result.extend(self.lr_data)
+    #     result.extend(self.lg_data)
+    #     return result
 
-    def allright(self):
-        #all right data
-        result = []
-        result.extend(self.ry_data,self.rr_data,self.rg_data)
-        return result
+    # def allright(self):
+    #     #all right data
+    #     result = []
+    #     result.extend(self.ry_data)
+    #     result.extend(self.rr_data)
+    #     result.extend(self.rg_data)
+    #     return result
 
-    def alltop(self):
-        # all top data
-        result = []
-        result.extend(self.ly_data,self.lr_data,self.lg_data,self.ry_data,self.rr_data,self.rg_data)
-        return result
+    # def alltop(self):
+    #     # all top data
+    #     result = []
+    #     result.extend(self.ly_data)
+    #     result.extend(self.lr_data)
+    #     result.extend(self.lg_data)
+    #     result.extend(self.ry_data)
+    #     result.extend(self.rr_data)
+    #     result.extend(self.rg_data)
+    #     return result
 
 
 infogainr = allinfogainresult()
 
-
-def rootiteration(Apples):
+# firstdata - ques
+def branch(Apples,cordi):
     Lapple = []
     Rapple = []
+    for n in Apples:
+        if cordi[0] == 1:
+            if n.xcordi >= cordi[1]:
+                #branching a left.
+                Lapple.append(n)
+            elif n.xcordi < cordi[1]:
+                #branching a right
+                Rapple.append(n)
+            else:
+                raise Exception("Branching error for rootiteration.")
+        elif cordi[0] == 0:
+            if n.ycordi >= cordi[1]:
+                #branching a left.
+                Lapple.append(n)
+            elif n.ycordi < cordi[1]:
+                #branching a right
+                Rapple.append(n)
+            else:
+                raise Exception("Branching error for rootiteration.")
+        else:
+            raise Exception("Coorinfo function error !")
+    return [Lapple,Rapple]
+
+
+def rootiteration(firstdata):
     i = 0
     #root iteration
     while i < Tc[2]:
         #the root node
         ques = coorinfo()
-        for n in Apples:
-            if ques[0] == 1:
-                if n.xcordi >= ques[1]:
-                    #branching a left.
-                    Lapple.append(n)
-                elif n.xcordi < ques[1]:
-                    #branching a right
-                    Rapple.append(n)
-                else:
-                    raise Exception("Branching error for rootiteration.")
-            elif ques[0] == 0:
-                if n.ycordi >= ques[1]:
-                    #branching a left.
-                    Lapple.append(n)
-                elif n.ycordi < ques[1]:
-                    #branching a right
-                    Rapple.append(n)
-                else:
-                    raise Exception("Branching error for rootiteration.")
-            else:
-                raise Exception("Coorinfo function error !")
+        result_branch = branch(firstdata,ques)
         #yellow apple left = yal
         yal = 0
         ral = 0
@@ -129,7 +140,7 @@ def rootiteration(Apples):
         yar = 0
         rar = 0
         gar = 0
-        for La in Lapple:
+        for La in result_branch[0]:
             if La.color == 1:
                 yal += 1
             elif La.color == 2:
@@ -138,7 +149,7 @@ def rootiteration(Apples):
                 gal += 1
             else:
                 raise Exception("Apple's color error for rootiteration.")
-        for Ra in Rapple:
+        for Ra in result_branch[1]:
             if Ra.color == 1:
                 yar += 1
             elif Ra.color == 2:
@@ -151,11 +162,9 @@ def rootiteration(Apples):
         #iteration result
         iteration_result = infogain(yal,ral,gal,yar,rar,gar)
         # crate'a infogain result class
-        myclass = infogainresult(iteration_result[0],iteration_result[1][0],iteration_result[1][1],iteration_result[1][2],iteration_result[1][3],iteration_result[1][4],iteration_result[1][5],ques[0],ques[1])
+        myclass = infogainresult(iteration_result[0],iteration_result[1][0],iteration_result[1][1],iteration_result[1][2],iteration_result[1][3],iteration_result[1][4],iteration_result[1][5],ques)
         # I save the result for iteration. Because we will select the max information gain.
         infogainr.result.append(myclass)
-        Rapple.clear()
-        Lapple.clear()
         iteration_result.clear()
         i += 1
 
@@ -165,19 +174,25 @@ def rootiteration(Apples):
         mylist.append(allresult.infogains)
     #max info gain
     selected_infogain = max(mylist)
+    #all iteration results 
     for allresult2 in infogainr.result:
         if allresult2.infogains == selected_infogain:
             #create a node
-            rootnode = node("root",allresult2.infogains,allresult2.ly_datas,allresult2.lr_datas,allresult2.lg_datas,allresult2.ry_datas,allresult2.rr_datas,allresult2.rg_datas,ques)
+            root_result = branch(firstdata,allresult2.queslist)
+            rootnode = node("root",allresult2.infogains,root_result[0],root_result[1],ques)
             infogainr.allresult.append(rootnode)
             infogainr.cleanresult()
+            T1 = Thread( target= mainbranching , args=(infogainr.allresult[0].leftdata,))
+            T1.start()
             return True
         else:
             continue
 
 
 def mainbranching(data):
-    pass
+    print("dallanma basladi")
+    return print("basarili")
+    
 
 
 # coordinate information funciton for iteration question
