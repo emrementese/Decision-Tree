@@ -22,7 +22,8 @@ print(f"Train data count finded: {len(traindata)} | Train is starting...")
 starttime = time.time()
 
 #control the rootiteration function
-iteration.rootiteration(traindata)
+#iteration.rootiteration(traindata)
+
 
 #control the entropi function
 #print(iteration.entropi(34,23,56))
