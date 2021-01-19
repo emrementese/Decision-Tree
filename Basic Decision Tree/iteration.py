@@ -67,32 +67,14 @@ class node():
         #iteration question for this node
         self.iteraques = iteraques
 
-    # def allleft(self):
-    #     #all left data
-    #     result = []
-    #     result.extend(self.ly_data)
-    #     result.extend(self.lr_data)
-    #     result.extend(self.lg_data)
-    #     return result
+    def datacount(self):
+        pass
 
-    # def allright(self):
-    #     #all right data
-    #     result = []
-    #     result.extend(self.ry_data)
-    #     result.extend(self.rr_data)
-    #     result.extend(self.rg_data)
-    #     return result
+    def colorcount(self):
+        pass
 
-    # def alltop(self):
-    #     # all top data
-    #     result = []
-    #     result.extend(self.ly_data)
-    #     result.extend(self.lr_data)
-    #     result.extend(self.lg_data)
-    #     result.extend(self.ry_data)
-    #     result.extend(self.rr_data)
-    #     result.extend(self.rg_data)
-    #     return result
+    def topdata(self):
+        pass
 
 
 infogainr = allinfogainresult()
