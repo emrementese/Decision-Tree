@@ -68,13 +68,17 @@ class node():
         self.iteraques = iteraques
 
     def datacount(self):
-        pass
+        alldata = len(self.leftdata) + len(self.rightdata)
+        return alldata
 
     def colorcount(self):
         pass
 
-    def topdata(self):
-        pass
+    def nodedata(self):
+        nodedata = []
+        nodedata.extend(self.leftdata)
+        nodedata.extend(self.rightdata)
+        return nodedata
 
 
 infogainr = allinfogainresult()
