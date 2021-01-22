@@ -169,7 +169,9 @@ def rootiteration(firstdata):
             infogainr.allresult.append(rootnode)
             infogainr.cleanresult()
             T1 = Thread( target= mainbranching , args=(infogainr.allresult[0].leftdata,))
+            T2 = Thread( target=mainbranching,args=(infogainr.allresult[0].rightdata,))
             T1.start()
+            T2.start()
             return True
         else:
             continue
