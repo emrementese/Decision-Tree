@@ -71,15 +71,18 @@ class node():
         alldata = len(self.leftdata) + len(self.rightdata)
         return alldata
 
-    def colorcount(self):
-        pass
-
     def nodedata(self):
-        nodedata = []
-        nodedata.extend(self.leftdata)
-        nodedata.extend(self.rightdata)
-        return nodedata
-
+        if (self.nodetype == 'root') or (self.nodetype == 'child'):
+            nodedata = []
+            nodedata.extend(self.leftdata)
+            nodedata.extend(self.rightdata)
+            return nodedata
+        
+        elif self.nodetype == 'leaf':
+            return self.infogain
+        
+        else:
+            raise Exception("Node type error.")
 
 infogainr = allinfogainresult()
 
@@ -111,6 +114,36 @@ def branch(Apples,cordi):
     return [Lapple,Rapple]
 
 
+def getcolor(left,right):
+    #yellow apple left = yal
+    yal = 0
+    ral = 0
+    gal = 0
+    #red apple right = rar
+    yar = 0
+    rar = 0
+    gar = 0
+    for La in left:
+        if La.color == 1:
+            yal += 1
+        elif La.color == 2:
+            ral += 1
+        elif La.color == 3:
+            gal += 1
+        else:
+            raise Exception("Apple's color error for rootiteration.")
+    for Ra in right:
+        if Ra.color == 1:
+            yar += 1
+        elif Ra.color == 2:
+            rar += 1
+        elif Ra.color == 3:
+            gar += 1
+        else:
+            raise Exception("Apple's color error for rootiteration.")
+    return [yal,ral,gal,yar,rar,gar] 
+
+
 def rootiteration(firstdata):
     i = 0
     #root iteration
@@ -118,42 +151,16 @@ def rootiteration(firstdata):
         #the root node
         ques = coorinfo()
         result_branch = branch(firstdata,ques)
-        #yellow apple left = yal
-        yal = 0
-        ral = 0
-        gal = 0
-        #red apple right = rar
-        yar = 0
-        rar = 0
-        gar = 0
-        for La in result_branch[0]:
-            if La.color == 1:
-                yal += 1
-            elif La.color == 2:
-                ral += 1
-            elif La.color == 3:
-                gal += 1
-            else:
-                raise Exception("Apple's color error for rootiteration.")
-        for Ra in result_branch[1]:
-            if Ra.color == 1:
-                yar += 1
-            elif Ra.color == 2:
-                rar += 1
-            elif Ra.color == 3:
-                gar += 1
-            else:
-                raise Exception("Apple's color error for rootiteration.") 
+        result_color = getcolor(result_branch[0],result_branch[1])
         #so we have a left apple's , right apple's and top apple's. We will compute the entropy of this branch
         #iteration result
-        iteration_result = infogain(yal,ral,gal,yar,rar,gar)
+        iteration_result = infogain(result_color[0],result_color[1],result_color[2],result_color[3],result_color[4],result_color[5])
         # crate'a infogain result class
         myclass = infogainresult(iteration_result[0],iteration_result[1][0],iteration_result[1][1],iteration_result[1][2],iteration_result[1][3],iteration_result[1][4],iteration_result[1][5],ques)
         # I save the result for iteration. Because we will select the max information gain.
         infogainr.result.append(myclass)
         iteration_result.clear()
         i += 1
-
     #so select the max information gain and save  data-question-infogain,right/left apples for this node.
     mylist = []
     for allresult in infogainr.result:
@@ -178,11 +185,14 @@ def rootiteration(firstdata):
 
 
 def mainbranching(data):
-    print("dallanma basladi")
-    return print("basarili")
+    if len(data) <= Tc[0]:
+        newnode = node("leaf",data,0,0,0)
+        infogainr.allresult.append(newnode)
+        return True
+    else:
+        print(data)
+
     
-
-
 # coordinate information funciton for iteration question
 def coorinfo():
     # question about - x (1) or y (0)
