@@ -86,6 +86,7 @@ class node():
 
 infogainr = allinfogainresult()
 
+
 # firstdata - ques
 def branch(Apples,cordi):
     Lapple = []
@@ -144,13 +145,12 @@ def getcolor(left,right):
     return [yal,ral,gal,yar,rar,gar] 
 
 
-def rootiteration(firstdata):
+def iteration(alldatas):
     i = 0
-    #root iteration
     while i < Tc[2]:
         #the root node
         ques = coorinfo()
-        result_branch = branch(firstdata,ques)
+        result_branch = branch(alldatas,ques)
         result_color = getcolor(result_branch[0],result_branch[1])
         #so we have a left apple's , right apple's and top apple's. We will compute the entropy of this branch
         #iteration result
@@ -161,6 +161,12 @@ def rootiteration(firstdata):
         infogainr.result.append(myclass)
         iteration_result.clear()
         i += 1
+    return True
+
+
+def rootiteration(firstdata):
+    #root iteration
+    iteration(firstdata)
     #so select the max information gain and save  data-question-infogain,right/left apples for this node.
     mylist = []
     for allresult in infogainr.result:
@@ -172,7 +178,7 @@ def rootiteration(firstdata):
         if allresult2.infogains == selected_infogain:
             #create a node
             root_result = branch(firstdata,allresult2.queslist)
-            rootnode = node("root",allresult2.infogains,root_result[0],root_result[1],ques)
+            rootnode = node("root",allresult2.infogains,root_result[0],root_result[1],allresult2.queslist)
             infogainr.allresult.append(rootnode)
             infogainr.cleanresult()
             T1 = Thread( target= mainbranching , args=(infogainr.allresult[0].leftdata,))
@@ -190,8 +196,9 @@ def mainbranching(data):
         infogainr.allresult.append(newnode)
         return True
     else:
-        print(data)
-
+        iteration(data)
+        print(infogainr.allresult)
+        return True
     
 # coordinate information funciton for iteration question
 def coorinfo():
