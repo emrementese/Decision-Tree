@@ -197,7 +197,6 @@ def mainbranching(data):
         return True
     else:
         iteration(data)
-        print(infogainr.allresult)
         return True
     
 # coordinate information funciton for iteration question
