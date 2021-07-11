@@ -4,9 +4,9 @@ import threading
 import time
 
 # Termination Criteria for branching
-MIN_DATA = 14
-MAX_DEPTH = 5
-MAX_ITERATION = 100
+MIN_DATA = 5
+MAX_DEPTH = 100
+MAX_ITERATION = 30
 ########################
 NODES = []
 TEST_RESULT = []
