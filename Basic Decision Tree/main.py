@@ -9,29 +9,45 @@
 '''
 
 import time
-import os
-import fileop
-import iteration
-from threading import Thread
+import apple
+import node
+import threading
 
 
-print("\n--- Welcome Basic Decision Tree ---")
-traindata = fileop.filextraction()
+print("\n--- Welcome Basic Decision Tree ---\n")
+
+################## TRAİN ##################
+
+traindata = apple.get_apples()
 #data count - train: 150 test: 22801
 print(f"Train data count finded: {len(traindata)} | Train is starting...")
+
+#show train data
+apple.show_apple(traindata)
+
 starttime = time.time()
+# train the data
+node.train(traindata,0,"ROOT")
 
-#control the rootiteration function
-iteration.rootiteration(traindata)
-
-
-#control the entropi function
-#print(iteration.entropi(34,23,56))
-
-#control the informaton gain function
-#print(iteration.infogain(30,20,40,10,25,25))
-
-#Branching - traindata is root data.
+while True:
+    if threading.active_count() == 1:
+        break
+    else:
+        continue
 
 finistime = time.time()
 print(f"Training lasted {finistime - starttime} seconds.")
+print(node.NODES)
+################## TEST ##################
+
+testdata = apple.get_apples()
+#data count - train: 150 test: 22801
+print(f"Test data count finded: {len(testdata )} | Test is starting...")
+
+starttime = time.time()
+result = node.test(testdata)
+finistime = time.time()
+print(f"Training lasted {finistime - starttime} seconds.")
+
+# #show train data
+# apple.show_apple(result)
