@@ -41,8 +41,7 @@ class node:
         if self.node_type ==  "leaf":
 
             if len(self.colors) == 0:
-                raise Exception("Please Restart to train. ")
-            
+                return False
             else:
                 yellow = 0
                 red = 0
@@ -136,20 +135,20 @@ def branching(adata):
     results = [infogains_results[-1],Lapple,Rapple]
     return results
     
-def train(traindatas,d,t):
+def train(traindatas,d):
 
     if (MIN_DATA >= len(traindatas)) or ( d >= MAX_DEPTH ):
         leafnode = node("leaf",0,0,traindatas,0,0,0)
-        NODES.append([leafnode,"LEAF"])
+        NODES.append(leafnode)
     else:
         node_info = branching(traindatas)
-        print(len(node_info[1]),len(node_info[2]))
+        # print(len(node_info[1]),len(node_info[2]))
 
         innernode = node("inner",node_info[0][2],node_info[0][3],node_info[0][1],node_info[0][0],node_info[1],node_info[2])
-        NODES.append([innernode,t])
+        NODES.append(innernode)
 
-        train(node_info[1], d+1, "LEFT")
-        train(node_info[2], d+1, "RIGHT")
+        train(node_info[1], d+1)
+        train(node_info[2], d+1)
         # t1 = threading.Thread(target=train,args=(node_info[1], d+1,))
         # t2 = threading.Thread(target=train,args=(node_info[2], d+1,))
         # t1.start()
@@ -262,17 +261,31 @@ def testbranching():
 
     pass
 
+
+testnode = -1
+
 # func input - > test data & train_result
-def test(testdatas,c):
+def test(testdatas):
+
+    global testnode 
+    
+    testnode += 1
 
     Ltest = []
     Rtest = []
 
-    roottest = NODES[c]
+    roottest = NODES[testnode]
 
     if roottest.node_type == "leaf":
-        pass
+        leafcolor = roottest.leafnode_color()
+        if leafcolor == False:
+                pass
+        else:
 
+            for leafdata in testdatas:
+                leafdata.color = leafcolor[1]
+                TEST_RESULT.append(leafdata)
+                
     else:
         for td in testdatas:
 
@@ -291,7 +304,7 @@ def test(testdatas,c):
             else:
                 raise Exception("Test - İteration cordi error")
             
-        test(Ltest,c+1)
+        test(Ltest)
         test(Rtest)
 
 
