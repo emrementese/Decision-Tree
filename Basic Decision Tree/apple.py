@@ -93,7 +93,7 @@ def show_apple(finput):
         elif f.color == 3:
             rgb = "green"
 
-        plt.scatter(f.xcordi,f.ycordi, color=rgb, s=20)
+        plt.scatter(f.xcordi,f.ycordi, color=rgb, s=1)
 
     # show the apples in the coordinate system
     plt.show()
