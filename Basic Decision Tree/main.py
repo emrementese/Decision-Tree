@@ -27,7 +27,7 @@ apple.show_apple(traindata)
 
 starttime = time.time()
 # train the data
-node.train(traindata,0,"ROOT")
+node.train(traindata,0)
 
 while True:
     if threading.active_count() == 1:
@@ -37,7 +37,6 @@ while True:
 
 finistime = time.time()
 print(f"Training lasted {finistime - starttime} seconds.")
-print(node.NODES)
 ################## TEST ##################
 
 testdata = apple.get_apples()
@@ -45,9 +44,13 @@ testdata = apple.get_apples()
 print(f"Test data count finded: {len(testdata )} | Test is starting...")
 
 starttime = time.time()
-result = node.test(testdata)
+node.test(testdata)
 finistime = time.time()
 print(f"Training lasted {finistime - starttime} seconds.")
 
-# #show train data
-# apple.show_apple(result)
+# with open("new.txt","w") as file:
+#     for t in node.TEST_RESULT:
+#         file.write(f"{t.xcordi} {t.ycordi} {t.color}" +"\n")
+
+#show train data
+apple.show_apple(node.TEST_RESULT)
