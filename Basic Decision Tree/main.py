@@ -23,7 +23,7 @@ traindata = apple.get_apples()
 print(f"Train data count finded: {len(traindata)} | Train is starting...")
 
 #show train data
-apple.show_apple(traindata)
+apple.show_apple(traindata,"Train Apples")
 
 starttime = time.time()
 # train the data
@@ -48,9 +48,9 @@ node.test(testdata)
 finistime = time.time()
 print(f"Training lasted {finistime - starttime} seconds.")
 
-# with open("new.txt","w") as file:
-#     for t in node.TEST_RESULT:
-#         file.write(f"{t.xcordi} {t.ycordi} {t.color}" +"\n")
+with open("result.txt","w") as file:
+    for t in node.TEST_RESULT:
+        file.write(f"{t.xcordi} {t.ycordi} {t.color}" +"\n")
 
 #show train data
-apple.show_apple(node.TEST_RESULT)
+apple.show_apple(node.TEST_RESULT,"Test Apples")
