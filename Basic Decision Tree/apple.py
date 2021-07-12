@@ -1,6 +1,16 @@
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 import matplotlib.pyplot as plt
 import time
 import os
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 class apple:
 
@@ -28,6 +38,11 @@ class apple:
     def inf_apple(self):
         print(f"This apple's:  X = {self.xcordi} | Y = {self.ycordi} | Color = {self.color} |")
 
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 def get_apples():
 
@@ -78,6 +93,11 @@ def get_apples():
             finally:
                 continue
 
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 # placing apples on coordinates and color for you
 def show_apple(finput,mode):
 
@@ -97,3 +117,8 @@ def show_apple(finput,mode):
 
     # show the apples in the coordinate system
     plt.show()
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
