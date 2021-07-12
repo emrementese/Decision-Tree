@@ -1,7 +1,17 @@
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 import math
 import random
 import threading
 import time
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 # Termination Criteria for branching
 MIN_DATA = 5
@@ -10,6 +20,11 @@ MAX_ITERATION = 20
 ########################
 NODES = []
 TEST_RESULT = []
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 class node:
 
@@ -66,6 +81,11 @@ class node:
                 return result[-1]
         else:
             print("This node not leaf")
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 def branching(adata):
 
@@ -134,7 +154,12 @@ def branching(adata):
 
     results = [infogains_results[-1],Lapple,Rapple]
     return results
-    
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 def train(traindatas,d):
 
     if (MIN_DATA >= len(traindatas)) or ( d >= MAX_DEPTH ):
@@ -154,6 +179,10 @@ def train(traindatas,d):
         # t1.start()
         # t2.start()
 
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 # coordinate information funciton for iteration question
 def coordinate_info():
@@ -173,6 +202,11 @@ def coordinate_info():
     # coordinate information for iteration question
     corin = [coordinate_xy,coordinate]
     return corin
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 def color_info(left,right):
     #yellow apple left = yal
@@ -203,6 +237,11 @@ def color_info(left,right):
             raise Exception("Apple's color error for rootiteration.")
     return [yal,ral,gal,yar,rar,gar] 
 
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 # entropi H(S) function. yellow data count: ydata, red data count: rdata, green data count: gdata
 def entropi(ydata,rdata,gdata):
     #p(c)
@@ -227,6 +266,11 @@ def entropi(ydata,rdata,gdata):
     # result to entropi
     entropi_result = -1 * allpc
     return entropi_result
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 #information gain function
 def infogain(data):
@@ -257,9 +301,10 @@ def infogain(data):
     return result
 
 
-def testbranching():
-
-    pass
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
 
 
 testnode = -1
@@ -308,5 +353,7 @@ def test(testdatas):
         test(Rtest)
 
 
-
-
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
