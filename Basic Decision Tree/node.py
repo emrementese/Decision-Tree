@@ -5,8 +5,8 @@ import time
 
 # Termination Criteria for branching
 MIN_DATA = 5
-MAX_DEPTH = 100
-MAX_ITERATION = 30
+MAX_DEPTH = 90
+MAX_ITERATION = 20
 ########################
 NODES = []
 TEST_RESULT = []
