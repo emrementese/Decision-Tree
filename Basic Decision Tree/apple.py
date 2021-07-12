@@ -79,10 +79,10 @@ def get_apples():
                 continue
 
 # placing apples on coordinates and color for you
-def show_apple(finput):
+def show_apple(finput,mode):
 
     plt.figure()
-    plt.title('Train Apples')
+    plt.title(mode)
 
     for f in finput:
 
