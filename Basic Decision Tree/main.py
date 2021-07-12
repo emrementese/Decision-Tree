@@ -13,6 +13,11 @@ import apple
 import node
 import threading
 
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
+
 
 print("\n--- Welcome Basic Decision Tree ---\n")
 
@@ -54,3 +59,8 @@ with open("result.txt","w") as file:
 
 #show train data
 apple.show_apple(node.TEST_RESULT,"Test Apples")
+
+'''
+Created by Emre MENTEŞE on 12.07.2021
+Copyright © 2021 Emre MENTEŞE. All rights reserved.
+'''
