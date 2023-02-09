@@ -3,14 +3,12 @@
 -> Copyright © 2023 Emre MENTEŞE. All rights reserved.
 '''
 
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 
 class Data:
-    xlim = [-1, 1]
-    ylim = [-1, 1]
+    xlim = [-1.5, 1.5]
+    ylim = [-1.5, 1.5]
     train_instances = []
     test_instances = []
 
@@ -84,7 +82,7 @@ class Data:
         cb = plt.colorbar(ticks=range(0, 4), label='Group', orientation="horizontal")
         cb.ax.tick_params(length=0)
         cb.set_ticklabels(["Test", "Yeşil", "Sarı", "Kırmızı"])
-        plt.show()
+        plt.show(block = True)
         return True
 
 # read train data
@@ -142,6 +140,3 @@ def rtestd():
 
     except Exception as e:
         print(f"Data read error: {e}")
-
-    
-print(rtraind()[0].view_data("train"))
