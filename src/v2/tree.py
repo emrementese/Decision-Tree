@@ -40,9 +40,9 @@ def show_apple(finput, mode):
 
 class Node:
 
-    MIN_DATA = 5
-    MAX_DEPTH = 80
-    MAX_ITERATION = 100
+    MIN_DATA = 2
+    MAX_DEPTH = 1000
+    MAX_ITERATION = 150
     nodes = []
 
     def __init__(self, Type, Depth, Data, Parent=None, Result=None, childL=None, childR =None) -> None:

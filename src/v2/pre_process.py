@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 class Data:
-    xlim = [-1.5, 1.5]
-    ylim = [-1.5, 1.5]
+    xlim = [-1, 1]
+    ylim = [-1, 1]
     train_instances = []
     test_instances = []
 
