@@ -14,40 +14,17 @@ import matplotlib as mpl
 TEST_RESULT = []
 testnode = -1
 
-
-# placing apples on coordinates and color for you
-def show_apple(finput, mode):
-
-    plt.figure()
-    plt.title(mode)
-    print(finput)
-
-    for f in finput:
-        keys = list(f.features.keys())
-
-        if f.color == 1:
-            rgb = "yellow"
-        elif f.color == 2:
-            rgb = "red"
-        elif f.color == 3:
-            rgb = "green"
-
-        plt.scatter(f.xcordi, f.ycordi, color=rgb, s=5)
-
-    # show the apples in the coordinate system
-    plt.show()
-
-
 class Node:
 
-    MIN_DATA = 2
-    MAX_DEPTH = 1000
-    MAX_ITERATION = 150
+    MIN_DATA = 1
+    MAX_DEPTH = 100
+    MAX_ITERATION = 100
     nodes = []
 
-    def __init__(self, Type, Depth, Data, Parent=None, Result=None, childL=None, childR =None) -> None:
+    def __init__(self, Type, Direction, Depth, Data, Parent=None, Result=None, childL=None, childR=None) -> None:
          
         self.Type = Type # (0,1,2) (root,normal,leaf)
+        self.direction = Direction  #  "left" or "right" or "up"
 
         self.parent = Parent # Parent Node (instance)
         self.childL = childL
@@ -97,13 +74,12 @@ class Node:
             self.Type = 2
         else:
             infogains_results = []
-
-            for i in range(0, self.MAX_ITERATION + 1):
+            i = 0
+            while i <= self.MAX_ITERATION:
                 if self.Type == 0:
                     ques = functions.coordinate_info()
                 else:
-                    parent_ques = [0,0]
-                    ques = functions.coordinate_info(parent_ques)
+                    ques = functions.coordinate_info([self.parent.result[0][2], self.parent.result[0][3],self.direction])
                 
                 Ldata = []
                 Rdata = []
@@ -128,17 +104,20 @@ class Node:
                     else:
                         raise Exception("İteration question error")
 
+                if (len(Ldata) == 0) or (len(Rdata) == 0):
+                    continue
+
                 # left right branch color for this iterations
                 colors = functions.color_info(Ldata, Rdata)
                 # info gain result
                 r = functions.infogain(colors)
 
                 # Infogainresult ,RLC count , quesinfo1 , quesinfo2
-
                 infogains_results.append([r[0], r[1], ques[0], ques[1]])
 
                 Ldata.clear()
                 Rdata.clear()
+                i += 1
 
             # infogains_results = sorted(infogains_results, key=lambda x: x[0])
             infogains_results = sorted(infogains_results)
@@ -166,8 +145,8 @@ class Node:
             results = [infogains_results[-1], Ldata, Rdata]
             self.result = results
 
-            left_node = Node(1, Depth=depth+1, Data=Ldata, Parent=self)
-            right_node = Node(1, Depth=depth+1, Data=Rdata, Parent=self)
+            left_node  = Node(Type = 1, Direction="left", Depth=depth +1, Data=Ldata, Parent=self)
+            right_node = Node(Type = 1, Direction="right", Depth=depth+1, Data=Rdata, Parent=self)
 
             self.childL = left_node
             self.childR = right_node
@@ -184,7 +163,6 @@ class Node:
         Rtest = []
         Ltest = []
         if self.Type == 2:
-            print("A")
             leafcolor = self.leafnode_color()
             if leafcolor == False:
                 pass
@@ -212,8 +190,6 @@ class Node:
                 else:
                     raise Exception("Test - İteration cordi error")
 
-            print(len(testdata))
-
             t = threading.Thread(target=self.childL.test, args=(Ltest,))
             t.start()
 
@@ -236,7 +212,7 @@ testdata[0].view_data("test")
 starttime = time.time()
 
 #root node
-root_node = Node(Type=0,Depth=0, Data=traindata)
+root_node = Node(Type=0,Direction="up",Depth=0, Data=traindata)
 # branching
 root_node.branching(0)
 
@@ -256,7 +232,6 @@ starttime = time.time()
 
 root_node.test(testdata)
 
-
 while True:
     if threading.active_count() == 1:
         break
@@ -264,11 +239,13 @@ while True:
         continue
 
 finistime = time.time()
-print(f"Training lasted {finistime - starttime} seconds.")
+print(f"Test lasted {finistime - starttime} seconds.")
 
-#show train data
-# show_apple(TEST_RESULT, "Test Apples")
+#show test data
 TEST_RESULT[0].view_data("test")
-# func input - > test data & train_result
 
+# print(len(root_node.nodes))
+# for n in root_node.nodes:
+#     if n.Type == 2:
+#         print(len(n.Data))
 

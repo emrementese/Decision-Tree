@@ -5,17 +5,17 @@ import random
 def coordinate_info(parent_ques = None):
     # question about - x (1) or y (0)
     coordinate_xy = random.randint(0, 1)
+    if parent_ques != None:
+        if coordinate_xy == parent_ques[0]:
+            if parent_ques[2] == "left":
+                coordinate = random.uniform(-1, parent_ques[1])
 
-    if coordinate_xy == 1:
-        # x coordinate question
-        coordinate = random.uniform(-1, 1)
-
-    elif coordinate_xy == 0:
-        # y coordinate question
-        coordinate = random.uniform(-1, 1)
+            elif parent_ques[2] == "right":
+                coordinate = random.uniform(parent_ques[1],1)
+        else:
+            coordinate = random.uniform(-1, 1)
     else:
-        raise Exception("Error for coorinfo function")
-
+        coordinate = random.uniform(-1, 1)
     # coordinate information for iteration question
     corin = [coordinate_xy, coordinate]
     return corin
