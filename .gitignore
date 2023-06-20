@@ -1,0 +1,10 @@
+documents
+
+.env 
+env
+/env
+/.env
+./env
+
+.DS_STORE
+.DS_Store
